@@ -1,0 +1,139 @@
+{
+    "name": "statusbar-debugger",
+    "displayName": "statusbar-debugger",
+    "description": "Statusbar debugger",
+    "version": "0.0.2",
+    "publisher": "nicolas",
+    "engines": {
+        "vscode": "^1.5.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "*"
+    ],
+    "main": "./out/src/extension",
+    "contributes": {
+        "commands": [
+			{
+				"command": "extension.statusbarDebugger.startDebug",
+				"title": "Start debug from Statusbar Debugger",
+				"category": "Statusbar Debugger"
+			}, {
+				"command": "extension.statusbarDebugger.stopDebug",
+				"title": "Stop debug from Statusbar Debugger",
+				"category": "Statusbar Debugger"
+			}
+		],
+		"configuration": {
+            "type": "object",
+            "title": "Statusbar Debugger",
+            "properties": {
+				
+				"statusbar_debugger.positionPriority": {
+					"type": "number",
+					"description": "The priority of the last StatusBarItem. Higher value means the item should be shown more to the left."
+				},
+
+				"statusbar_debugger.clearConsoleBeforeDebug": {
+					"type": "boolean",
+					"default": true,
+					"description": "If true, clear the REPL or integrated terminal before debugging."
+				},
+
+				"statusbar_debugger.defaultConfig": {
+					"type": "object",
+					"description": "The default launch config.",
+					"properties": {
+						"type": {
+							"type": "string",
+							"description": "The type of debugger to use for this launch configuration."
+						},
+						"request": {
+							"type": "string",
+							"description": "The request type of this launch configuration."
+						},
+						"cwd": {
+							"type": "string",
+							"description": "Current working directory for finding dependencies and other files."
+						},
+						"console": {
+							"type": "string",
+							"description": "Where to launch the debug target: internal console, integrated terminal, or external terminal.",
+							"default": "none",
+							"enum": [
+								"none",
+								"externalTerminal",
+								"integratedTerminal"
+							]
+						},
+						"debugOptions": {
+							"type": "array",
+							"description": "array of debug options",
+							"items": {
+								"type": "string",
+								"description": "Advanced options."
+							}
+						}
+					},
+					"required": [
+						"type"
+					]
+				},
+				
+                "statusbar_debugger.optionList": {
+                    "type": ["array"],
+                    "description": "array of debug option",
+                    
+                    "items": {
+                        "type": "object",
+                        "description": "debug option",
+                        "properties": {
+							"selected": {
+								"type": "boolean",
+								"description": "If true, it become the defulat selected option."
+							},
+							"displayName": {
+                                "type": "string",
+                                "description": "The text shown in the statusbar."
+                            },
+							"config": {
+                                "type": "object",
+								"description": "launch config objcet",
+								"properties": {
+									"name": {
+										"type": "string",
+										"description": "The name of debug config. Would shown in the Quick Pick description."
+									},
+									"program": {
+										"type": "string",
+										"description": "Executable or file to run when launching the debugger."
+									}
+								}
+                            }
+                        },
+                        "required": [
+                            "displayName",
+                            "config"
+                        ]
+                    }
+				}
+				
+            }
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "tsc -p ./",
+        "compile": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "typescript": "^2.0.3",
+        "vscode": "^1.0.0",
+        "mocha": "^2.3.3",
+        "@types/node": "^6.0.40",
+        "@types/mocha": "^2.2.32"
+    }
+}

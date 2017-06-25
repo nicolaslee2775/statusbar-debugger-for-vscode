@@ -1,0 +1,44 @@
+// 將您的設定放入此檔案中以覆寫預設值和使用者設定。
+{
+	"statusbar_debugger.positionPriority": 0,
+	"statusbar_debugger.clearConsoleBeforeDebug": false,
+	"statusbar_debugger.defaultConfig": {
+		"type": "python",
+		"request": "launch",
+		"stopOnEntry": false,
+		"pythonPath": "${config.python.pythonPath}",
+		"cwd": "${workspaceRoot}",
+		"console": "integratedTerminal",
+		"debugOptions": [
+			"WaitOnAbnormalExit",
+			"WaitOnNormalExit",
+			"RedirectOutput"
+		]
+	},
+	"statusbar_debugger.optionList": [
+		{
+			"color": "#ffff40",
+			"displayName": "test",
+			"config": {
+				"name": "Run test.py",
+				"program": "${workspaceRoot}/test.py"
+			}
+		},
+		{
+			"displayName": "test2",
+			"config": {
+				"name": "Run test2.py",
+				"program": "${workspaceRoot}/test2.py"
+			}
+		},
+		{
+			"selected": true,
+			"displayName": "normal",
+			"config": {
+				"name": "Run Python",
+				"program": "${file}/"
+			}
+		}
+	],
+	"python.linting.pylintEnabled": false
+}
